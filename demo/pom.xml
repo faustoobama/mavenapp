@@ -34,7 +34,7 @@
 	                    <manifest>
 	                        <addClasspath>true</addClasspath>
 	                        <classpathPrefix>lib/</classpathPrefix>
-	                        <mainClass>com.example.demo.DemoApplication</mainClass> <!-- Reemplaza esto con el nombre de tu clase principal -->
+	                        <mainClass>com.MainController</mainClass>
 	                    </manifest>
 	                </archive>
 	            </configuration>
