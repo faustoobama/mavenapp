@@ -1,5 +1,5 @@
 node {
-  def mavenTool = tool 'maven-jenkins'
+  def mavenTool = tool 'maven_jenkins'
   try{
     stage('Preparation'){
       git branch: 'master', url: 'https://github.com/faustoobama/mavenapp.git'
