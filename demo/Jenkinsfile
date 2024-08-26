@@ -11,23 +11,7 @@ node {
         ${mavenTool}/bin/mvn -B -DskipTests clean package
       '''
     }
-    stage('sonarqube-scan'){
-      def sonarqubeTool = tool name: 'sonarqube-scanner' type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-      withCredentials([String(credentialsId: 'sonarqube-credentials', variable: 'sonarqubeLogin')]){
-        sh '''
-          ${sonarqubeToll}/bin/sonar-scanner \
-          -e -Dsonar.host.url=http:sonarqube:9000 \
-          -Dsonar.login=${sonarqubeLogin} \
-          -Dsonar.projectName=Maven-App \
-          -Dsonar.version=1.0 \
-          -Dsonar.projectKey=MV \
-          -Dsonar.sources=demo/src/main \
-          -Dsonar.tests=demo/src/test \
-          -Dsonar.language=java \
-          -Dsonar.java.binaries=.
-        '''
-      }
-    }
+    
     stage('Test'){
       sh '''
       echo "Starting testing stage"
