@@ -1,13 +1,18 @@
 node {
+  def mavenTool = tool 'maven-jenkins'
   try{
     stage('Preparation'){
       git branch: 'master', url: 'https://github.com/faustoobama/mavenapp.git'
     }
     stage('Build'){
-      sh 'cd demo'
+      sh 'cd demo && ${mavenTool}/bin/mvn -B -DskipTests clean package'
     }
     stage('Test'){
-      sh 'pwd && ls -lsh && pwd'
+      sh 'cd demo && ${mavenTool}/bin/mvn test'
+    }
+
+    stage('Deploy'){
+      sh 'java -jar demo/target/demo-1.jar'
     }
   }catch(Exception e){
     echo "Pipeline failled: ${e.message}"
