@@ -7,7 +7,7 @@ node {
       sh 'cd demo'
     }
     stage('Test'){
-      sh 'pwd && ls -lsh && pwd''
+      sh 'pwd && ls -lsh && pwd'
     }
   }catch(Exception e){
     echo "Pipeline failled: ${e.message}"
