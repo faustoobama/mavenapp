@@ -21,7 +21,10 @@ node {
           -Dsonar.projectName=Maven-App \
           -Dsonar.version=1.0 \
           -Dsonar.projectKey=MV \
-          -Dsonar.sources=demo/src/main
+          -Dsonar.sources=demo/src/main \
+          -Dsonar.tests=demo/src/test \
+          -Dsonar.language=java \
+          -Dsonar.java.binaries=.
         '''
       }
     }
