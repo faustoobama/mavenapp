@@ -15,7 +15,7 @@ node {
       def sonarqubeTool = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
       withCredentials([string(credentialsId: 'sonarqube-credentials', variable: 'sonarqubeLogin')]){
         sh """
-          ${sonarqubeToll}/bin/sonar-scanner \
+          ${sonarqubeTool}/bin/sonar-scanner \
           -e -Dsonar.host.url=http:sonarqube:9000 \
           -Dsonar.login=${sonarqubeLogin} \
           -Dsonar.projectName=Maven-App \
