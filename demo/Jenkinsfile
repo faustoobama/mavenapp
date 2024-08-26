@@ -5,10 +5,10 @@ node {
       git branch: 'master', url: 'https://github.com/faustoobama/mavenapp.git'
     }
     stage('Build'){
-      sh 'cd demo && ${mavenTool}/bin/mvn -B -DskipTests clean package'
+      sh "cd demo && ${mavenTool}/bin/mvn -B -DskipTests clean package"
     }
     stage('Test'){
-      sh 'cd demo && ${mavenTool}/bin/mvn test'
+      sh "cd demo && ${mavenTool}/bin/mvn test"
     }
 
     stage('Deploy'){
