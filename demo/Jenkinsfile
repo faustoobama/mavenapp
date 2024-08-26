@@ -1,0 +1,18 @@
+node {
+  try{
+    stage('Preparation'){
+      git branch: 'master', url: 'https://github.com/faustoobama/mavenapp.git'
+    }
+    stage('Build'){
+      sh 'cd demo'
+    }
+    stage('Test'){
+      sh 'pwd && ls -lsh && pwd''
+    }
+  }catch(Exception e){
+    echo "Pipeline failled: ${e.message}"
+    currentBuild.result = 'FAILURE'
+  }finally{
+    cleanWs()
+  }
+}
