@@ -5,14 +5,39 @@ node {
       git branch: 'master', url: 'https://github.com/faustoobama/mavenapp.git'
     }
     stage('Build'){
-      sh "cd demo && ${mavenTool}/bin/mvn -B -DskipTests clean package"
+      sh '''
+      echo "Starting Build stage"
+        cd demo &&
+        ${mavenTool}/bin/mvn -B -DskipTests clean package
+      '''
+    }
+    stage('sonarqube-scan'){
+      def sonarqubeTool = tool name: 'sonarqube-scanner' type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+      withCredentials([String(credentialsId: 'sonarqube-credentials', variable: 'sonarqubeLogin')]){
+        sh '''
+          ${sonarqubeToll}/bin/sonar-scanner \
+          -e -Dsonar.host.url=http:sonarqube:9000 \
+          -Dsonar.login=${sonarqubeLogin} \
+          -Dsonar.projectName=Maven-App \
+          -Dsonar.version=1.0 \
+          -Dsonar.projectKey=MV \
+          -Dsonar.sources=demo/src/main
+        '''
+      }
     }
     stage('Test'){
-      sh "cd demo && ${mavenTool}/bin/mvn test"
+      sh '''
+      echo "Starting testing stage"
+        cd demo &&
+        ${mavenTool}/bin/mvn test
+      '''
     }
 
     stage('Deploy'){
-      sh 'java -jar demo/target/demo-1.jar'
+      sh '''
+        echo "Deploying ..."
+        java -jar demo/target/demo-1.jar
+      '''
     }
   }catch(Exception e){
     echo "Pipeline failled: ${e.message}"
