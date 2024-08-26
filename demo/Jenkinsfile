@@ -13,7 +13,7 @@ node {
     }
     stage('sonarqube-scan'){
       def sonarqubeTool = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-      withCredentials([String(credentialsId: 'sonarqube-credentials', variable: 'sonarqubeLogin')]){
+      withCredentials([string(credentialsId: 'sonarqube-credentials', variable: 'sonarqubeLogin')]){
         sh """
           ${sonarqubeToll}/bin/sonar-scanner \
           -e -Dsonar.host.url=http:sonarqube:9000 \
